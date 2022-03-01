@@ -7,8 +7,9 @@ on:
         required: true
         type: string
       create_artifacts:
-        required: true
+        required: false
         type: boolean
+        default: false
 
 jobs:
   build_app:
