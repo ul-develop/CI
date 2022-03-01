@@ -5,9 +5,10 @@ inputs:
   folder_name:
     description: folder to build
     required: true
-  artifacts_name:
-    description: artifacts name
-    required: true
+  create_artifacts:
+    description: indicates if create artifacts
+    required: false
+    default: false
     
 runs:
   using: 'composite'
@@ -22,8 +23,9 @@ runs:
       env:
         NODE_ENV: production
     - name: upload_artifacts
+      if: ${{ inputs.create_artifacts == true }}
       uses: actions/upload-artifact@v2
       with: 
-        name: ${{ inputs.artifacts_name }}
+        name: ${{ inputs.folder_name }} deployment package
         path: ${{ inputs.folder_name }}/app.zip
         
