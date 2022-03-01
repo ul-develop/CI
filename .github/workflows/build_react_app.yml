@@ -6,9 +6,9 @@ on:
       app_folder:
         required: true
         type: string
-      artifacts_name:
+      create_artifacts:
         required: true
-        type: string
+        type: boolean
 
 jobs:
   build_app:
@@ -19,4 +19,4 @@ jobs:
       - uses: ul-develop/CI/.github/actions/build_react_app@main
         with:
           folder_name: ${{ inputs.app_folder }}
-          artifacts_name: ${{ inputs.artifacts_name }}
+          create_artifacts: ${{ inputs.create_artifacts }}
