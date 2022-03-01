@@ -1,11 +1,14 @@
-name: Build App
-description: 'Build React app and save to artifacts'
+name: Build ReactJS App
+description: 'Build ReactJS app and save to artifacts'
 
 inputs:
   folder_name:
     description: folder to build
     required: true
-
+  artifacts_name:
+    description: artifacts name
+    required: true
+    
 runs:
   using: 'composite'
   steps:
@@ -15,7 +18,12 @@ runs:
         cd ${{ inputs.folder_name }}
         yarn install
         yarn build 
-        ls
-        ls build
+        zip -r app.zip ./build
       env:
         NODE_ENV: production
+    - name: upload_artifacts
+      uses: actions/upload-artifact@v2
+      with: 
+        name: ${{ inputs.artifacts_name }}
+        path: ${{ inputs.folder_name }}/app.zip
+        
