@@ -1,0 +1,17 @@
+name: Build ReactJS app
+
+on:
+  workflow_call:
+    inputs:
+      app_folder:
+        required: true
+        type: string
+
+jobs:
+  build_app:
+    name: build app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/build_react_app
+        with:
+          folder_name: ${{ inputs.app_folder }}

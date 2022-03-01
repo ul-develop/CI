@@ -1,0 +1,21 @@
+name: Build App
+description: 'Build React app and save to artifacts'
+
+inputs:
+  folder_name:
+    description: folder to build
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: build
+      shell: bash
+      run: |
+        cd ${{ inputs.folder_name }}
+        yarn install
+        yarn build 
+        ls
+        ls build
+      env:
+        NODE_ENV: production
