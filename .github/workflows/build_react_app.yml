@@ -12,6 +12,7 @@ jobs:
     name: build app
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/build_react_app
         with:
           folder_name: ${{ inputs.app_folder }}
