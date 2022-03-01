@@ -19,12 +19,14 @@ runs:
         cd ${{ inputs.folder_name }}
         yarn install
         yarn build 
-        
       env:
         NODE_ENV: production
+        
     - name: zip_build
+      shell: bash
       if: ${{ inputs.create_artifacts == true }}
       run: zip -r app.zip ./${{ inputs.folder_name }}/build
+      
     - name: upload_artifacts
       if: ${{ inputs.create_artifacts == true }}
       uses: actions/upload-artifact@v2
